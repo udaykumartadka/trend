@@ -53,12 +53,6 @@
         "project": "TrendMicro"
       }
     },
-    "availabilitySetSettings": {
-      "type": "object",
-      "metadata": {
-        "description": "Availability Set settings object"
-      }
-    },
     "trendmicroTags": {
        "type": "object"
     }
@@ -104,24 +98,6 @@
           }
         }
       ]
-      }
-    },
-
-    {
-      "apiVersion": "[parameters('network-api-version')]",
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[concat(parameters('availabilitySetSettings').name, copyindex())]",
-      "copy": {
-        "name": "availabilitySetLoop",
-        "count": "[parameters('availabilitySetSettings').count]"
-      },
-      "tags": {
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "platformFaultDomainCount": "[parameters('availabilitySetSettings').fdCount]",
-        "platformUpdateDomainCount": "[parameters('availabilitySetSettings').udCount]"
       }
     }
 
