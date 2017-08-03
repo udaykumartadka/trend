@@ -132,39 +132,31 @@
     {
       "apiVersion": "[parameters('network-api-version')]",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[concat(variables('publicIPAddressNameDSAWindows'),copyindex())]",
+      "name": "[concat(variables('publicIPAddressNameDSAWindows'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('windowsvmcount')]"
-      },
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
-          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgentWindows'),copyindex())]"
+          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgentWindows'))]"
         }
       }
     },
     {
       "apiVersion": "[parameters('network-api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('networkInterfaceNameDSAWindows'),copyindex())]",
+      "name": "[concat(variables('networkInterfaceNameDSAWindows'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows'),copyindex())]"
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows')]"
       ],
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('windowsvmcount')]"
-      },
       "properties": {
         "ipConfigurations": [
           {
@@ -172,10 +164,10 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAWindows'),copyindex()))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAWindows')))]"
               },
               "subnet": {
-                "id": "[parameters('subnet4Ref')]"
+                "id": "[parameters('subnet2Ref')]"
               }
             }
           }
@@ -185,18 +177,14 @@
     {
       "apiVersion": "[parameters('compute-api-version')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNameDSAWindows'),copyindex())]",
+      "name": "[concat(parameters('vmNameDSAWindows'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('windowsvmcount')]"
-      },
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows'),copyindex())]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows')]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -215,9 +203,9 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(parameters('vmNameDSAWindows'),copyindex(),'-osDisk')]",
+            "name": "[concat(parameters('vmNameDSAWindows'),'-osDisk')]",
             "vhd": {
-              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAWindows'),copyindex(),'-osdisk.vhd')]"
+              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAWindows'),'-osdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -226,7 +214,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAWindows'),copyindex()))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAWindows'))]"
             }
           ]
         }
@@ -235,18 +223,14 @@
     {
       "apiVersion": "[parameters('compute-api-version')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmNameDSAWindows'), copyindex(),'/Installation')]",
+      "name": "[concat(parameters('vmNameDSAWindows'), '/Installation')]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('windowsvmcount')]"
-      },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAWindows'),copyindex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAWindows'))]"
       ],
       "properties": {
         "publisher": "TrendMicro.DeepSecurity",
@@ -267,39 +251,31 @@
     {
       "apiVersion": "[parameters('network-api-version')]",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[concat(variables('publicIPAddressNameDSAgent'),copyindex())]",
+      "name": "[concat(variables('publicIPAddressNameDSAgent'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('linuxvmcount')]"
-      },
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
-          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgent'),copyindex())]"
+          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgent'))]"
         }
       }
     },
     {
       "apiVersion": "[parameters('network-api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('networkInterfaceNameDSAgent'),copyindex())]",
+      "name": "[concat(variables('networkInterfaceNameDSAgent'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAgent'),copyindex())]"
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAgent'))]"
       ],
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('linuxvmcount')]"
-      },
       "properties": {
         "ipConfigurations": [
           {
@@ -307,10 +283,10 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAgent'),copyindex()))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAgent')))]"
               },
               "subnet": {
-                "id": "[parameters('subnet4Ref')]"
+                "id": "[parameters('subnet2Ref')]"
               }
             }
           }
@@ -320,19 +296,15 @@
     {
       "apiVersion": "[parameters('compute-api-version')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNameDSAgent'),copyindex())]",
+      "name": "[concat(parameters('vmNameDSAgent'))]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAgent'),copyindex())]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAgent'))]"
       ],
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('linuxvmcount')]"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSizeDSAgent')]"
@@ -350,9 +322,9 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(parameters('vmNameDSAgent'),copyindex(),'-osDisk')]",
+            "name": "[concat(parameters('vmNameDSAgent'),'-osDisk')]",
             "vhd": {
-              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAgent'),copyindex(),'-osdisk.vhd')]"
+              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAgent'),'-osdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -361,7 +333,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAgent'),copyindex()))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAgent')))]"
             }
           ]
         }
@@ -370,19 +342,15 @@
     {
       "apiVersion": "[parameters('compute-api-version')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmNameDSAgent'), copyindex(),'/Installation')]",
+      "name": "[concat(parameters('vmNameDSAgent'),'/Installation')]",
       "location": "[parameters('location')]",
       "tags": {
         "project": "[parameters('tagvalues').project]",
         "provider": "[parameters('trendmicroTags').provider]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAgent'),copyindex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAgent'))]"
       ],
-      "copy": {
-        "name": "foo",
-        "count": "[parameters('linuxvmcount')]"
-      },
       "properties": {
         "publisher": "TrendMicro.DeepSecurity",
         "type": "TrendMicroDSALinux",
