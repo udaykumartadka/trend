@@ -155,7 +155,7 @@
                 "provider": "[parameters('trendmicroTags').provider]"
             },
             "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows')]"
+                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows'))]"
             ],
             "properties": {
                 "ipConfigurations": [
