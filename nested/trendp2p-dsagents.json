@@ -184,7 +184,7 @@
                 "provider": "[parameters('trendmicroTags').provider]"
             },
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows')]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows'))]"
             ],
             "properties": {
                 "hardwareProfile": {
