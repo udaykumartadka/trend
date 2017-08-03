@@ -1,371 +1,371 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "location": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "network-api-version": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "compute-api-version": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "publicIPDomainNameLabelDSAgentWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "windowsOSVersion": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "adminUsernameDSAgent": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "adminPasswordDSAgent": {
-      "type": "securestring",
-      "defaultValue": ""
-    },
-    "publicIPDomainNameLabelDSAgent": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "ubuntuOSVersion": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "linuxvmcount": {
-      "type": "int",
-      "defaultValue": ""
-    },
-    "windowsvmcount": {
-      "type": "int",
-      "defaultValue": ""
-    },
-    "ManagerAddress": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "subnet2Ref": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "vmNameDSAWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "vmSizeDSAWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "vmNameDSAgent": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "vmSizeDSAgent": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "imagePublisherWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "imageOfferWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "imagePublisherLinux": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "imageOfferLinux": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "vmStorageAccountContainerName": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "ActivationPort": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "TenantIdentifier": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "TenantActivationPassword": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "adminUsernameDSAgentWindows": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "adminPasswordDSAgentWindows": {
-      "type": "securestring",
-      "defaultValue": ""
-    },
-    "tagvalues": {
-      "type": "object",
-      "defaultValue": ""
-    },
-    "trendmicroTags": {
-      "type": "object"
-    }
-  },
-  "variables": {
-    "publicIPAddressNameDSAWindows": "publicipdsawindows",
-    "networkInterfaceNameDSAWindows": "[concat(parameters('vmNameDSAWindows'),'-nic')]",
-    "publicIPAddressNameDSAgent": "publicipdsalinux",
-    "networkInterfaceNameDSAgent": "[concat(parameters('vmNameDSAgent'),'-nic')]"
-  },
-  "resources": [
-    {
-      "apiVersion": "[parameters('network-api-version')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[concat(variables('publicIPAddressNameDSAWindows'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic",
-        "dnsSettings": {
-          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgentWindows'))]"
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "network-api-version": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "compute-api-version": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "publicIPDomainNameLabelDSAgentWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "windowsOSVersion": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "adminUsernameDSAgent": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "adminPasswordDSAgent": {
+            "type": "securestring",
+            "defaultValue": ""
+        },
+        "publicIPDomainNameLabelDSAgent": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "ubuntuOSVersion": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "linuxvmcount": {
+            "type": "int",
+            "defaultValue": ""
+        },
+        "windowsvmcount": {
+            "type": "int",
+            "defaultValue": ""
+        },
+        "ManagerAddress": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "subnet2Ref": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "vmNameDSAWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "vmSizeDSAWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "vmNameDSAgent": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "vmSizeDSAgent": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "imagePublisherWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "imageOfferWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "imagePublisherLinux": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "imageOfferLinux": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "vmStorageAccountContainerName": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "ActivationPort": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "TenantIdentifier": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "TenantActivationPassword": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "adminUsernameDSAgentWindows": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "adminPasswordDSAgentWindows": {
+            "type": "securestring",
+            "defaultValue": ""
+        },
+        "tagvalues": {
+            "type": "object",
+            "defaultValue": ""
+        },
+        "trendmicroTags": {
+            "type": "object"
         }
-      }
     },
-    {
-      "apiVersion": "[parameters('network-api-version')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('networkInterfaceNameDSAWindows'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows')]"
-      ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAWindows')))]"
-              },
-              "subnet": {
-                "id": "[parameters('subnet2Ref')]"
-              }
-            }
-          }
-        ]
-      }
+    "variables": {
+        "publicIPAddressNameDSAWindows": "publicipdsawindows",
+        "networkInterfaceNameDSAWindows": "[concat(parameters('vmNameDSAWindows'),'-nic')]",
+        "publicIPAddressNameDSAgent": "publicipdsalinux",
+        "networkInterfaceNameDSAgent": "[concat(parameters('vmNameDSAgent'),'-nic')]"
     },
-    {
-      "apiVersion": "[parameters('compute-api-version')]",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNameDSAWindows'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows')]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('vmSizeDSAWindows')]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmNameDSAWindows')]",
-          "adminUsername": "[parameters('adminUsernameDSAgentWindows')]",
-          "adminPassword": "[parameters('adminPasswordDSAgentWindows')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[parameters('imagePublisherWindows')]",
-            "offer": "[parameters('imageOfferWindows')]",
-            "sku": "[parameters('windowsOSVersion')]",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "[concat(parameters('vmNameDSAWindows'),'-osDisk')]",
-            "vhd": {
-              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAWindows'),'-osdisk.vhd')]"
+    "resources": [
+        {
+            "apiVersion": "[parameters('network-api-version')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[concat(variables('publicIPAddressNameDSAWindows'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
             },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAWindows'))]"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "apiVersion": "[parameters('compute-api-version')]",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmNameDSAWindows'), '/Installation')]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAWindows'))]"
-      ],
-      "properties": {
-        "publisher": "TrendMicro.DeepSecurity",
-        "type": "TrendMicroDSA",
-        "typeHandlerVersion": "9.6",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "DSMname": "[parameters('ManagerAddress')]",
-          "DSMport": "[parameters('ActivationPort')]",
-          "policyNameorID": ""
-        },
-        "protectedSettings": {
-          "tenantID": "[parameters('TenantIdentifier')]",
-          "tenantPassword": "[parameters('TenantActivationPassword')]"
-        }
-      }
-    },
-    {
-      "apiVersion": "[parameters('network-api-version')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[concat(variables('publicIPAddressNameDSAgent'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic",
-        "dnsSettings": {
-          "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgent'))]"
-        }
-      }
-    },
-    {
-      "apiVersion": "[parameters('network-api-version')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('networkInterfaceNameDSAgent'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAgent'))]"
-      ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAgent')))]"
-              },
-              "subnet": {
-                "id": "[parameters('subnet2Ref')]"
-              }
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgentWindows'))]"
+                }
             }
-          }
-        ]
-      }
-    },
-    {
-      "apiVersion": "[parameters('compute-api-version')]",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(parameters('vmNameDSAgent'))]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAgent'))]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('vmSizeDSAgent')]"
         },
-        "osProfile": {
-          "computerName": "[parameters('vmNameDSAgent')]",
-          "adminUsername": "[parameters('adminUsernameDSAgent')]",
-          "adminPassword": "[parameters('adminPasswordDSAgent')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[parameters('imagePublisherLinux')]",
-            "offer": "[parameters('imageOfferLinux')]",
-            "sku": "[parameters('ubuntuOSVersion')]",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "[concat(parameters('vmNameDSAgent'),'-osDisk')]",
-            "vhd": {
-              "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAgent'),'-osdisk.vhd')]"
+        {
+            "apiVersion": "[parameters('network-api-version')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[concat(variables('networkInterfaceNameDSAWindows'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
             },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAgent')))]"
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAWindows')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAWindows')))]"
+                            },
+                            "subnet": {
+                                "id": "[parameters('subnet2Ref')]"
+                            }
+                        }
+                    }
+                ]
             }
-          ]
-        }
-      }
-    },
-    {
-      "apiVersion": "[parameters('compute-api-version')]",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmNameDSAgent'),'/Installation')]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "project": "[parameters('tagvalues').project]",
-        "provider": "[parameters('trendmicroTags').provider]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAgent'))]"
-      ],
-      "properties": {
-        "publisher": "TrendMicro.DeepSecurity",
-        "type": "TrendMicroDSALinux",
-        "typeHandlerVersion": "9.6",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "DSMname": "[parameters('ManagerAddress')]",
-          "DSMport": "[parameters('ActivationPort')]",
-          "policyNameorID": ""
         },
-        "protectedSettings": {
-          "tenantID": "[parameters('TenantIdentifier')]",
-          "tenantPassword": "[parameters('TenantActivationPassword')]"
+        {
+            "apiVersion": "[parameters('compute-api-version')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[concat(parameters('vmNameDSAWindows'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAWindows')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSizeDSAWindows')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmNameDSAWindows')]",
+                    "adminUsername": "[parameters('adminUsernameDSAgentWindows')]",
+                    "adminPassword": "[parameters('adminPasswordDSAgentWindows')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('imagePublisherWindows')]",
+                        "offer": "[parameters('imageOfferWindows')]",
+                        "sku": "[parameters('windowsOSVersion')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[concat(parameters('vmNameDSAWindows'),'-osDisk')]",
+                        "vhd": {
+                            "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAWindows'),'-osdisk.vhd')]"
+                        },
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage"
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAWindows'))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "[parameters('compute-api-version')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmNameDSAWindows'), '/Installation')]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAWindows'))]"
+            ],
+            "properties": {
+                "publisher": "TrendMicro.DeepSecurity",
+                "type": "TrendMicroDSA",
+                "typeHandlerVersion": "9.6",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "DSMname": "[parameters('ManagerAddress')]",
+                    "DSMport": "[parameters('ActivationPort')]",
+                    "policyNameorID": ""
+                },
+                "protectedSettings": {
+                    "tenantID": "[parameters('TenantIdentifier')]",
+                    "tenantPassword": "[parameters('TenantActivationPassword')]"
+                }
+            }
+        },
+        {
+            "apiVersion": "[parameters('network-api-version')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[concat(variables('publicIPAddressNameDSAgent'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[concat(parameters('publicIPDomainNameLabelDSAgent'))]"
+                }
+            }
+        },
+        {
+            "apiVersion": "[parameters('network-api-version')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[concat(variables('networkInterfaceNameDSAgent'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameDSAgent'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddressNameDSAgent')))]"
+                            },
+                            "subnet": {
+                                "id": "[parameters('subnet2Ref')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "[parameters('compute-api-version')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[concat(parameters('vmNameDSAgent'))]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceNameDSAgent'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSizeDSAgent')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmNameDSAgent')]",
+                    "adminUsername": "[parameters('adminUsernameDSAgent')]",
+                    "adminPassword": "[parameters('adminPasswordDSAgent')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('imagePublisherLinux')]",
+                        "offer": "[parameters('imageOfferLinux')]",
+                        "sku": "[parameters('ubuntuOSVersion')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[concat(parameters('vmNameDSAgent'),'-osDisk')]",
+                        "vhd": {
+                            "uri": "[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/',parameters('vmStorageAccountContainerName'),'/',parameters('vmNameDSAgent'),'-osdisk.vhd')]"
+                        },
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage"
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceNameDSAgent')))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "[parameters('compute-api-version')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmNameDSAgent'),'/Installation')]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "project": "[parameters('tagvalues').project]",
+                "provider": "[parameters('trendmicroTags').provider]"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('vmNameDSAgent'))]"
+            ],
+            "properties": {
+                "publisher": "TrendMicro.DeepSecurity",
+                "type": "TrendMicroDSALinux",
+                "typeHandlerVersion": "9.6",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "DSMname": "[parameters('ManagerAddress')]",
+                    "DSMport": "[parameters('ActivationPort')]",
+                    "policyNameorID": ""
+                },
+                "protectedSettings": {
+                    "tenantID": "[parameters('TenantIdentifier')]",
+                    "tenantPassword": "[parameters('TenantActivationPassword')]"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
